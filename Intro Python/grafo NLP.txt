@@ -1,0 +1,36 @@
+﻿4NgMITsQSEcXg8kXnX0Ir
+
+WITH split(tolower("meu gato come peixe no sabado"), " ") AS text 
+UNWIND range(0,size(text)-2) AS i
+MERGE (w1:Word {name: text[i]})
+MERGE (w2:Word {name: text[i+1]})
+MERGE (w1)-[:NEXT]->(w2)
+
+WITH split(tolower("meu cão come osso no domingo"), " ") AS text 
+UNWIND range(0,size(text)-2) AS i
+MERGE (w1:Word {name: text[i]})
+MERGE (w2:Word {name: text[i+1]})
+MERGE (w1)-[r:NEXT]->(w2)
+	ON CREATE SET r.count = 1
+	ON MATCH SET r.count = r.count +1;
+	
+	
+WITH split(tolower("esse passaro come alpiste no domingo"), " ") AS text 
+UNWIND range(0,size(text)-2) AS i
+MERGE (w1:Word {name: text[i]})
+	ON CREATE SET w1.count = 1 ON MATCH SET w1.count = w1.count +1
+MERGE (w2:Word {name: text[i+1]})
+	ON CREATE SET w2.count = 1 ON MATCH SET w2.count = w2.count +1
+MERGE (w1)-[r:NEXT]->(w2)
+	ON CREATE SET r.count = 1 ON MATCH SET r.count = r.count +1
+	
+	
+MATCH(w:Word)
+RETURN w.name AS word, w.count AS word_count
+ORDER BY w.count DESC LIMIT 10
+
+MATCH(w1:Word)-[r:NEXT]->(w2:Word)
+RETURN [w1.name, w2.name] AS word_pair, r.count AS count
+ORDER BY count DESC LIMIT 5
+
+Task
