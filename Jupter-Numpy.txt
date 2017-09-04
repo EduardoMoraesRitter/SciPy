@@ -6,11 +6,16 @@ pip3 install jupyter
 jupyter-notebook
 
 
-
 pip3 install numpy
 
 pip3 show numpy
 
 
-
 pip3 install matplotlib
+
+pip3 install pandas
+
+pip3 install pydataset
+pip3 install db.py
+pip3 install xlrd
+pip3 install xlwt
