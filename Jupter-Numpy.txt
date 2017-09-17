@@ -1,5 +1,6 @@
 apt-get install python3-pip
 
+pip list
 
 pip3 install jupyter
 
@@ -15,7 +16,12 @@ pip3 install matplotlib
 
 pip3 install pandas
 
-pip3 install pydataset
-pip3 install db.py
-pip3 install xlrd
-pip3 install xlwt
+pip install pydataset
+pip install db.py
+pip install xlrd
+pip install xlwt
+
+pip search pyserial
+pip install pyserial
+
+pip install tensoflow
